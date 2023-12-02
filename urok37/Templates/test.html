@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} Тест {% endblock %}
+{% load custom_filters %}
+{% block content %}
+<div class="test-container">
+    <h1>Тест</h1>
+    <form method="post" id="test-form">
+        {% csrf_token %}
+        {% for question in test %}
+            <div class="question-container">
+                <img src="{{ question.image.url }}" alt="Изображение вопроса" class="question-image">
+                <p>{{ question.text }}</p>
+                <p>Варианты ответов:</p>
+                {% for answer in question|get_random_answers %}
+                    <div class="answer-option">
+                        <label for="answer_{{ question.id }}_{{ forloop.counter }}">{{ answer }}</label>
+                        <input type="radio" value="{{ answer }}" name="answers_{{ question.id }}" id="answer_{{ question.id }}_{{ forloop.counter }}">
+                    </div>
+                {% endfor %}
+                <input type="hidden" name="like" value="{{ question.id }}">
+                <input type="submit" value="Like {{ question.likes_count }}" class="like-button">
+            </div>
+        {% endfor %}
+
+        <input class="submit-button" value="Отправить" type="submit">
+    </form>
+</div>
+{% endblock content %}

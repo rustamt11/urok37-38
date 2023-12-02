@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Добавьте ссылки на CSS, если необходимо -->
+</head>
+<body class="background-dark text-color-white">
+    <header class="main-header">
+        <nav class="navbar-custom">
+            <div class="container">
+              <a class="navbar-logo" href="{% url 'home' %}">Персонаж-Квиз</a>
+              <div class="navbar-menu">
+                <ul class="navbar-items">
+                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Главная</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'quiz' %}">Тест</a>
+                  </li>
+                </ul>
+                <ul class="user-info">
+                {% if user.is_authenticated %}
+                <li class="user-statistics">
+                  <span>Пройдено тестов: {{ user.passed_tests }}</span>
+                </li>
+                <li class="user-statistics">
+                  <span>Правильных ответов: {{ user.correct_answers }}</span>
+                </li>
+                <li class="user-statistics">
+                  <span>Неправильных ответов: {{ user.wrong_answers }}</span>
+                </li>
+                <li class="user-statistics">
+                  <span>Идеальных тестов: {{ user.perfect_tests }}</span>
+                </li>
+                <li class="nav-item">
+                   <span>Пользователь: {{ user.username }}</span>
+                </li>
+                <li class="nav-item">
+                  <a class="btn-profile" href="{% url 'profile' user.pk %}">Профиль</a>
+              </li>
+               <li class="nav-item">
+                   <a class="btn-logout" href="{% url 'logout' %}">Выйти</a>
+               </li>
+               {% else %}
+               <li class="nav-item">
+                   <a class="btn-login" href="{% url 'login' %}">Войти</a>
+               </li>
+               <li class="nav-item">
+                   <a class="btn-register" href="{% url 'register' %}">Регистрация</a>
+               </li>
+               {% endif %}
+            </ul>
+              </div>
+            </div>
+          </nav>
+    </header>
+    <main class="content-container">
+        {% block content %}
+        {% endblock content %}
+    </main>
+</body>
+</html>

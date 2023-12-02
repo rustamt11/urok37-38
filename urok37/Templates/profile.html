@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} Профиль {% endblock %}
+{% block content %}
+    <div style="margin-top: 140px;" class="border d-flex flex-column align-items-center border-primary rounded-3">
+        <h1 class="ms-3 me-3">Профиль</h1>
+        <p class="ms-3 me-3">Никнейм: {{ user.username }}</p>
+        <p class="ms-3 me-3">Пройдено тестов: {{ user.passed_tests }}</p>
+        <p class="ms-3 me-3">Правильных ответов: {{ user.correct_answers }}</p>
+        <p class="ms-3 me-3">Неправильных ответов: {{ user.wrong_answers }}</p>
+        <p class="ms-3 me-3">Идеальных тестов: {{ user.perfect_tests }}</p>
+        <p class="ms-3 me-3">Процент правильных ответов: {{ user.success_rate }}</p>
+        <p class="ms-3 me-3"><a class="btn btn-primary" href="{% url 'edit_profile' user.pk %}">Изменить профиль</a></p>
+        <p class="ms-3 me-3"><a class="btn btn-primary" href="{% url 'change_password' %}">Изменить пароль</a></p>
+        <p class="ms-3 me-3"><a class="btn btn-primary" href="{% url 'add_question' %}">Добавить вопрос</a></p>
+    </div>
+{% endblock content %}

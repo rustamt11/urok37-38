@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} Создание Вопроса {% endblock %}
+{% block content %}
+<div class="question-creation-container">
+    <form enctype="multipart/form-data" method="post" class="question-form">
+        {% csrf_token %}
+        <div class="form-fields">{{ form.as_p }}</div>
+        <input class="submit-button" type="submit" value="Создать вопрос">
+    </form>
+</div>
+{% endblock content %}

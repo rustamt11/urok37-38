@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %} Главная {% endblock %}
+{% block content %}
+<div class="welcome-container">
+    <h1>Добро пожаловать</h1>
+    <p><a class="btn-test" href="{% url 'quiz' %}">Пройти тест</a></p>
+</div>
+{% endblock content %}
